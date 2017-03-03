@@ -5,7 +5,7 @@
 :- use_module(np, [np/1, np/2]).
 :- use_module(vp, [vp/3, transitive_vp/3, intransitive_vp/1]).
 
-simple_sentence(NP, VP, R):-
-	np(NP),
+simple_sentence(S, VP, R):-
+	np(S),
 	vp(V, N, VP),
-	concat_words(NP, VP, R).
+	concat_words(S, VP, R).
