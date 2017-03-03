@@ -1,5 +1,7 @@
 :- use_module(library(clpfd)).
 
+:- module(affix, [affix/1, prefix/1, suffix/1]).
+
 affix(X):-
 	prefix(X) ; suffix(X). % ; infix(X) ; circumfix(X)
 
