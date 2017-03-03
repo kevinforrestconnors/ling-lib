@@ -1,4 +1,4 @@
-:- module(det_n, [sg_n/1, pl_n/1, np/1, np/2]).
+:- module(n, [sg_n/1, pl_n/1, np/1, np/2]).
 
 :- use_module(library(clpfd)).
 :- [det].

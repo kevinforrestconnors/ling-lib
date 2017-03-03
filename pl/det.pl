@@ -1,4 +1,4 @@
-:- module(det_n, [det/1, sg_det/1, pl_det/1, sg_n/1, pl_n/1, np/1, np/2]).
+:- module(det, [det/1, sg_det/1, pl_det/1]).
 
 det(X):-
 	sg_det(X) ; pl_det(X).

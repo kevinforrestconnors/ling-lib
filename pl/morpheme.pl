@@ -1,6 +1,8 @@
 :- use_module(library(clpfd)).
 :- [affix].
 
+% Subset of crosslinguistic morphemes
+
 % Prefixes
 morpheme('NEG-'). % negation
 
