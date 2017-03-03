@@ -1,17 +1,19 @@
-:- module(det_n, [np_sg, np_pl, np])
+:- module(det_n, [det/1, sg_det/1, pl_det/1, sg_n/1, pl_n/1, np/1, np/2]).
 
-plural_type([one]).
-plural_type([some]).
+det(X):-
+	sg_det(X) ; pl_det(X).
 
-det([a]).
-plurality([a], [one]). % a cat - *a cats
+sg_det([a]).
+sg_det([one]).
+sg_det([the]).
+sg_det([this]).
+sg_det([that]).
 
-det([the]).
-plurality([the], [one]). % the cat
-plurality([the], [some]). % the cats
-
-det([some]).
-plurality([some], [some]).
+pl_det([the]).
+pl_det([some]).
+pl_det([many]).
+pl_det([these]).
+pl_det([those]).
 
 noun([man]).
 noun([woman]).
@@ -20,25 +22,23 @@ noun([dog]).
 
 plural(Noun, Plural):-
 	noun(Noun),
-	append(Noun, [s], Plural).
+	append(Noun, [-pl], Plural).
 
-% n(Plurality, Result)
-n([one], Result):-
-	noun(Result).
-n([some], Result):-
-	noun(N),
-	plural(N, Result).
+sg_n(R):-
+	noun(R).
+pl_n(R):-
+	noun(R0),
+	plural(R0, R).
 
-np_sg(Result):-
-	np([one], Result).
-
-np_pl(Result):-
-	np([some], Result).
-
-np(Plurality, Result):-
-	det(Det),
-	plurality(Det, Plurality),
-	n(Plurality, N),
+np(R):-
+	np(sg, R) ; np(pl, R).
+np(sg, R):-
+	sg_det(Det),
+	sg_n(Noun),
 	append(Det, [#], T),
-	append(T, N, Result).
-
+	append(T, Noun, R).
+np(pl, R):-
+	pl_det(Det),
+	pl_n(Noun),
+	append(Det, [#], T),
+	append(T, Noun, R).
