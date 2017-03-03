@@ -3,7 +3,7 @@
 :- use_module(library(clpfd)).
 :- use_module(helpers, [concat_words/3]).
 :- use_module(v, [v/1, transitive_v/1, intransitive_v/1]).
-:- use_module(np, [np/1, np/2]).
+:- use_module(np, [np/2, np/3]).
 
 vp(V, NP, R):-
 	transitive_vp(V, NP, R) ; intransitive_vp(V).
