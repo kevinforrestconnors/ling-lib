@@ -1,5 +1,5 @@
 :- use_module(library(clpfd)).
-:- [affix].
+:- use_module(affix, [affix/1, prefix/1, suffix/1]).
 
 % Subset of crosslinguistic morphemes
 

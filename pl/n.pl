@@ -1,7 +1,6 @@
-:- module(n, [sg_n/1, pl_n/1, np/1, np/2]).
+:- module(n, [sg_n/1, pl_n/1]).
 
-:- use_module(library(clpfd)).
-:- [det].
+:- use_module(det, [det/1, sg_det/1, pl_det/1]).
 
 % Subset of English nouns
 noun([man]).
@@ -18,16 +17,3 @@ sg_n(R):-
 pl_n(R):-
 	noun(R0),
 	pluralize(R0, R).
-
-np(R):-
-	np(sg, R) ; np(pl, R).
-np(sg, R):-
-	sg_det(Det),
-	sg_n(Noun),
-	append(Det, [#], T),
-	append(T, Noun, R).
-np(pl, R):-
-	pl_det(Det),
-	pl_n(Noun),
-	append(Det, [#], T),
-	append(T, Noun, R).
