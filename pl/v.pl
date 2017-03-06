@@ -1,8 +1,14 @@
 :- module(v, [v/1, transitive_v/1, intransitive_v/1]).
 
-v(X):-
-	transitive_v(X) ; intransitive_v(X).
+:- use_module(helpers, [head/2]).
 
+v([X|_]):-
+	v_helper([X]).
+v_helper(X):-
+	(transitive_v(X)
+	;
+	intransitive_v(X)).
+	
 % Subset of English verbs
 transitive_v([hit]).
 transitive_v([love]).
@@ -10,4 +16,3 @@ transitive_v([kiss]).
 
 intransitive_v([cry]).
 intransitive_v([sleep]).
-

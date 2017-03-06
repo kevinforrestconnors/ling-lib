@@ -10,7 +10,7 @@ vp(V, NP, R):-
 	
 transitive_vp(V, NP, R):-
 	transitive_v(V),
-	np(NP),
+	np(_, NP),
 	concat_words(V, NP, R).
 
 intransitive_vp(V):-
