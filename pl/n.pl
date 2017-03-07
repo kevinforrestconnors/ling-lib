@@ -16,12 +16,25 @@
 :- use_module(det, [det/1, sg_det/1, pl_det/1]).
 
 % n = the root word of a noun
-n(Noun):-
-	normal_noun(Noun) ; pronoun(Noun).
+n(N):-
+	normal_noun(N) ; pronoun(N).
+
+sg_n(N):-
+	normal_noun(N) ; sg_pronoun(N).
+pl_n(N):-
+	normal_noun(N) ; pl_pronoun(N).
 
 % noun = a word(Noun, Morphemes) construct
-noun(word(Root, [])):-
-	normal_noun(Root) ; pronoun(Root).
+noun(word(Root, Morphemes)):-
+	(
+		noun(word(Root, Morphemes), '-sg')
+	;	noun(word(Root, Morphemes), '-pl')
+	).
+noun(word(Root, []), '-sg'):-
+	sg_n(Root).
+noun(word(Root, M2), '-pl'):-
+	pl_n(Root),
+	pluralize(word(Root, []), word(Root, M2)).
 
 normal_noun('man').
 normal_noun('woman').
@@ -78,16 +91,3 @@ pluralize(word(Noun, Morphemes), R):-
 		R = word(Noun, Morphemes)
 	).
 
-sg_n(R):-
-	(
-		normal_noun(Noun)
-	;	sg_pronoun(Noun)
-	),
-	word_of_noun(Noun, R).
-pl_n(R):-
-	(
-		normal_noun(Noun)
-	;	pl_pronoun(Noun)
-	),
-	word_of_noun(Noun, Word),
-	pluralize(Word, R).
