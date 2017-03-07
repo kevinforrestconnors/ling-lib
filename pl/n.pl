@@ -1,5 +1,6 @@
 :- module(n, [
-	n/1, 
+	n/1,
+	noun/1,
 	normal_noun/1, 
 	pronoun/1, 
 	sg_pronoun/1,
@@ -14,9 +15,13 @@
 :- use_module(morpheme, [add_morpheme/3]).
 :- use_module(det, [det/1, sg_det/1, pl_det/1]).
 
-% Subset of English nouns
-n(X):-
-	normal_noun(X) ; pronoun(X).
+% n = the root word of a noun
+n(Noun):-
+	normal_noun(Noun) ; pronoun(Noun).
+
+% noun = a word(Noun, Morphemes) construct
+noun(word(Root, [])):-
+	normal_noun(Root) ; pronoun(Root).
 
 normal_noun('man').
 normal_noun('woman').
@@ -56,10 +61,10 @@ trd_person('it').
 word_of_noun(Noun, word(Noun, [])).
 
 person_of_noun(Noun, '-1'):-
-	n(Noun),
+	is_n(Noun),
 	fst_person(Noun).
 person_of_noun(Noun, '-2'):-
-	n(Noun),
+	is_n(Noun),
 	snd_person(Noun).
 person_of_noun(Noun, '-3'):-
 	n(Noun),
