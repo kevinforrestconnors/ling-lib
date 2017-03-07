@@ -71,11 +71,11 @@ person_of_noun(Noun, '-3'):-
 	(trd_person(Noun) ; normal_noun(Noun)).
 
 % pluralize(word(+Noun, +Morphemes), -Word)
-pluralize(word(Noun, Morphemes), Word):-
+pluralize(word(Noun, Morphemes), R):-
 	(normal_noun(Noun) ->
-		add_morpheme(word(Noun, Morphemes), '-pl', Word)
+		add_morpheme(word(Noun, Morphemes), '-pl', R)
 	;
-		Word = word(Noun, Morphemes)
+		R = word(Noun, Morphemes)
 	).
 
 sg_n(R):-
