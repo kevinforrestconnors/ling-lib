@@ -1,4 +1,4 @@
-:- module(mopheme, [morpheme/1, has_morpheme/2, add_morpheme/2]).
+:- module(mopheme, [morpheme/1, has_morpheme/2, add_morpheme/3]).
 
 :- use_module(library(clpfd)).
 :- use_module(word, [word/2]).

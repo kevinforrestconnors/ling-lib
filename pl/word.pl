@@ -30,8 +30,6 @@ morphemes_well_formed(Morphemes):-
 display_word(word(Root, Morphemes), Ortho):-
 	include(prefix, Morphemes, Prefixes),
 	include(suffix, Morphemes, Suffixes),
-	print(Prefixes),
-	print(Suffixes),
 	atomic_list_concat(Prefixes, WordPrefix),
 	atomic_list_concat(Suffixes, WordSuffix),
 	atom_concat(WordPrefix, Root, T),

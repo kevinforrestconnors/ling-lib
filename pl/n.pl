@@ -1,6 +1,6 @@
 :- module(n, [
 	n/1,
-	noun/1,
+	noun/2,
 	normal_noun/1, 
 	pronoun/1, 
 	sg_pronoun/1,
@@ -13,7 +13,6 @@
 ]).
 
 :- use_module(morpheme, [add_morpheme/3]).
-:- use_module(det, [det/1, sg_det/1, pl_det/1]).
 
 % n = the root word of a noun
 n(N):-
