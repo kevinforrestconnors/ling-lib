@@ -3,6 +3,8 @@
 	noun/2,
 	normal_noun/1, 
 	pronoun/1, 
+	pronoun/2,
+	pronoun/3,
 	sg_pronoun/1,
 	pl_pronoun/1,
 	word_of_noun/2, 
@@ -16,7 +18,7 @@
 
 % n = the root word of a noun
 n(N):-
-	normal_noun(N) ; pronoun(N).
+	normal_noun(N) ; pr(N).
 
 sg_n(N):-
 	normal_noun(N) ; sg_pronoun(N).
@@ -40,8 +42,38 @@ normal_noun('woman').
 normal_noun('cat').
 normal_noun('dog').
 
-pronoun(X):-
-	sg_pronoun(X) ; pl_pronoun(X).
+pr(Pr):-
+	sg_pronoun(Pr) ; pl_pronoun(Pr).
+
+% pronoun/1
+% Describes all pronouns
+pronoun(word(Pr, [Person, Number])):-
+	pronoun(word(Pr, [Person, Number]), Person, Number).
+
+% pronoun/2
+% Describes pronouns with a specific person
+pronoun(Word, '-1'):-
+	pronoun(Word, '-1', _).
+pronoun(Word, '-2'):-
+	pronoun(Word, '-2', _).
+pronoun(Word, '-3'):-
+	pronoun(Word, '-3', _).
+
+% pronoun/2 
+% Describes pronouns with a specific number
+pronoun(Word, '-sg'):-
+	pronoun(Word, _, '-sg').
+pronoun(Word, '-pl'):-
+	pronoun(Word, _, '-pl').
+
+% pronoun/3
+% Describes pronouns with a specific person and number
+pronoun(word(Pr, [Person, '-sg']), Person, '-sg'):-
+	sg_pronoun(Pr),
+	person_of_noun(Pr, Person).
+pronoun(word(Pr, [Person, '-pl']), Person, '-pl'):-
+	pl_pronoun(Pr),
+	person_of_noun(Pr, Person).
 
 sg_pronoun('i').
 sg_pronoun('you').
@@ -73,10 +105,10 @@ trd_person('it').
 word_of_noun(Noun, word(Noun, [])).
 
 person_of_noun(Noun, '-1'):-
-	is_n(Noun),
+	n(Noun),
 	fst_person(Noun).
 person_of_noun(Noun, '-2'):-
-	is_n(Noun),
+	n(Noun),
 	snd_person(Noun).
 person_of_noun(Noun, '-3'):-
 	n(Noun),
