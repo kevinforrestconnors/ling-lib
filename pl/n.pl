@@ -1,4 +1,15 @@
-:- module(n, [n/1, normal_noun/1, pronoun/1, sg_n/1, pl_n/1, person_of_noun/2, pluralize/2]).
+:- module(n, [
+	n/1, 
+	normal_noun/1, 
+	pronoun/1, 
+	sg_pronoun/1,
+	pl_pronoun/1,
+	word_of_noun/2, 
+	person_of_noun/2, 
+	pluralize/2,
+	sg_n/1, 
+	pl_n/1
+]).
 
 :- use_module(morpheme, [add_morpheme/3]).
 :- use_module(det, [det/1, sg_det/1, pl_det/1]).
